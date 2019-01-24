@@ -1,7 +1,9 @@
 import React from 'react'
 import api from './adaptors/api'
+import { login, loadUserQuestions } from './actions/index'
+import { connect } from 'react-redux'
 
-export default class Login extends React.Component {
+class Login extends React.Component {
 
   constructor() {
     super ();
@@ -27,7 +29,8 @@ export default class Login extends React.Component {
         if (res.error) {
           this.setState({error: true});
         } else {
-          console.log('our user is', res.username);
+          this.props.login(res);
+          this.props.loadUserQuestions(res.id)
         }
     });
   };
@@ -66,11 +69,13 @@ export default class Login extends React.Component {
   }
 
 
-
-
-
-
-
-
-
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: user => dispatch(login(user)),
+    loadUserQuestions: user => dispatch(loadUserQuestions(user))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Login)
