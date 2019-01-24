@@ -8,7 +8,6 @@ class QuestionsContainer extends Component {
   render() {
     return (
       <div>
-
       </div>
     );
   }
@@ -17,12 +16,6 @@ class QuestionsContainer extends Component {
 
 export default connect()(QuestionsContainer)
 
-
-//<QuestionForm/>
+// Implement these next:
 //<Questions />
-// const mapStateToProps = state => ({ questions: state.questions })
-//
-// const mapDispatchToProps = dispatch => ({
-//   addRestaurant: text => dispatch({type: 'ADD_RESTAURANT', text}),
-//   deleteRestaurant: id => dispatch({type: 'DELETE_RESTAURANT', id})
-// })
+//<QuestionForm />

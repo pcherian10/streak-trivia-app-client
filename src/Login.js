@@ -1,6 +1,6 @@
 import React from 'react'
 import api from './adaptors/api'
-import { login, loadUserQuestions } from './actions/index'
+import { login } from './actions/index'
 import { connect } from 'react-redux'
 
 class Login extends React.Component {
@@ -30,7 +30,7 @@ class Login extends React.Component {
           this.setState({error: true});
         } else {
           this.props.login(res);
-          this.props.loadUserQuestions(res.id)
+          this.props.history.push('/dashboard')
         }
     });
   };
@@ -74,7 +74,6 @@ class Login extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     login: user => dispatch(login(user)),
-    loadUserQuestions: user => dispatch(loadUserQuestions(user))
   }
 }
 
