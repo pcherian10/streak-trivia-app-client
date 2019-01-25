@@ -5,9 +5,27 @@ const headers = {
   Accepts: 'application/json'
 };
 
-const getQuestions = () => {
-  return fetch(`${API_ROOT}/questions/`, {headers: headers})
+const addQuestion = (user, question) => {
+  return fetch(`${API_ROOT}/users/${user.id}/questions`, {
+    method: 'POST',
+    headers: headers,
+    data: {},
+    dataType: "JSON",
+    body: JSON.stringify({ question })
+  }).then(res => res.json());
+
 };
+
+// const getUserQuestions = (user) => {
+//   return fetch(`${API_ROOT}/users/${user.id}/questions`, {
+//     method: 'GET',
+//     headers: headers,
+//     data: {},
+//     dataType: "JSON",
+//   }).then(res => res.json());
+//
+// };
+
 
 const login = (username, password) => {
   return fetch(`${API_ROOT}/auth/`, {
@@ -23,6 +41,7 @@ export default {
     login
   },
   questions: {
-    getQuestions
+    addQuestion,
+    //getUserQuestions
   }
 };

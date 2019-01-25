@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import QuestionCard from './QuestionCard'
 
-class Questions extends Component {
+class QuestionCard extends Component {
 
   render() {
     return (
@@ -13,4 +12,4 @@ class Questions extends Component {
 }
 
 
-export default connect()(Questions)
+export default connect()(QuestionCard)

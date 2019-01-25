@@ -8,6 +8,8 @@ class QuestionsContainer extends Component {
   render() {
     return (
       <div>
+        <QuestionForm />
+        <Questions />
       </div>
     );
   }
@@ -15,7 +17,3 @@ class QuestionsContainer extends Component {
 
 
 export default connect()(QuestionsContainer)
-
-// Implement these next:
-//<Questions />
-//<QuestionForm />
