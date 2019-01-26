@@ -48,6 +48,7 @@ class QuestionsForm extends Component {
 
   render() {
     return (
+
       <Grid centered style={styles.root}>
         <Grid.Column width={10}>
           <Header as='h1'>Submit a Question!</Header>
@@ -125,6 +126,7 @@ class QuestionsForm extends Component {
           </Form>
         </Grid.Column>
       </Grid>
+
     );
   }
 }
