@@ -16,16 +16,12 @@ export function loadGameQuestions () {
   }
 }
 
-export function loadUserQuestions (user) {
+export function loadQuestions () {
   return dispatch => {
-    fetch(`${URL_ROOT}users/${user.id}/questions`)
+    fetch(`${URL_ROOT}questions`)
     .then(res => res.json())
     .then( res => {
-      dispatch({ type: 'LOAD_USER_QUESTIONS', questions: res})
+      dispatch({ type: 'LOAD_QUESTIONS', questions: res})
     })
   }
 }
-
-// export function addQuestion (user) {
-//
-// }

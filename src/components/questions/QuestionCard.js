@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { Card, Header } from 'semantic-ui-react'
 
-class QuestionCard extends Component {
+const QuestionCard = ({question}) => {
 
-  render() {
-    return (
-      <div>
-      </div>
-    );
-  }
+  return(
+    <div>
+      <Card.Group>
+        <Header as="h3">{question.text}</Header>
+          <Card fluid color='red' header={question.first_choice} />
+          <Card fluid color='orange' header={question.second_choice} />
+          <Card fluid color='yellow' header={question.third_choice} />
+      </Card.Group>
+    </div>
+  )
 }
 
-
-export default connect()(QuestionCard)
+export default (QuestionCard)

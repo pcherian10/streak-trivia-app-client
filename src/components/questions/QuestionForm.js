@@ -1,18 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import api from '../../adaptors/api'
 import '../../App.css';
+import { Grid, Form, Button, Radio, Header } from 'semantic-ui-react'
 
+const styles = {
+  root: {
+    marginTop: "5%"
+  }
+}
 
 class QuestionsForm extends Component {
 
-  state = {
-    text: "",
-    first_choice: "",
-    second_choice: "",
-    third_choice: "",
-    correct_answer: ""
+  constructor() {
+    super()
+
+    this.state = {
+      text: "",
+      first_choice: "",
+      second_choice: "",
+      third_choice: "",
+      correct_answer: ""
+    }
+
   }
 
   handleSubmit = e => {
@@ -20,19 +30,17 @@ class QuestionsForm extends Component {
     api.questions
     .addQuestion(this.props.user, this.state)
       .then(res => {
-          {console.log("Question added.")}
+          console.log("Question added.")
         }
     );
   };
 
-
-  onRadioChange = value => {
-    this.setState({
-      correct_answer: value
-    })
-  }
+  onRadioChange = (e , {value}) => this.setState(
+    {correct_answer: value}
+  );
 
   handleOnChange = event => {
+    console.log(event.target.name)
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -40,54 +48,83 @@ class QuestionsForm extends Component {
 
   render() {
     return (
-      <div>
-          <form onSubmit={this.handleSubmit}>
-
-            <div>
-
-              <label> Question: </label>
-                <textarea
+      <Grid centered style={styles.root}>
+        <Grid.Column width={10}>
+          <Header as='h1'>Submit a Question!</Header>
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Field>
+              <label>Question</label>
+                <input
+                  type="text"
                   name = "text"
                   value = {this.state.text}
-                  onChange = {this.handleOnChange}
-                />
+                  onChange = {this.handleOnChange} />
+            </Form.Field>
 
-              <label> First Choice: </label>
-                <textarea
+            <Form.Field>
+              <label>First Choice:</label>
+                <input
+                  type="text"
                   name = "first_choice"
                   value = {this.state.first_choice}
-                  onChange = {this.handleOnChange}
-                  />
+                  onChange = {this.handleOnChange} />
+            </Form.Field>
 
-              <label> Second Choice: </label>
-                <textarea
+            <Form.Field>
+              <label>Second Choice:</label>
+                <input
+                  type="text"
                   name = "second_choice"
                   value = {this.state.second_choice}
-                  onChange = {this.handleOnChange}
-                  />
+                  onChange = {this.handleOnChange} />
+            </Form.Field>
 
-              <label> Third Choice: </label>
-                <textarea
+            <Form.Field>
+              <label>Third Choice:</label>
+                <input
+                  type="text"
                   name = "third_choice"
                   value = {this.state.third_choice}
-                  onChange = {this.handleOnChange}
+                  onChange = {this.handleOnChange} />
+            </Form.Field>
+
+
+                <Form.Field>
+                  <label> Set Answer: </label>
+                  <Radio
+                    label="1"
+                    name="correct_answer"
+                    value="1"
+                    checked={this.state.correct_answer === "1"}
+                    onChange={this.onRadioChange}
                   />
-          </div>
+                </Form.Field>
 
 
-          <div>
-            <p>Set Correct Answer: </p>
-            <RadioGroup horizontal name="correct_answer" onChange={this.onRadioChange} value={this.state.correct_answer}>
-              <RadioButton value="1">1</RadioButton>
-              <RadioButton value="2">2</RadioButton>
-              <RadioButton value="3">3</RadioButton>
-            </RadioGroup>
-          </div>
+                <Form.Field>
+                  <Radio
+                    label="2"
+                    name="correct_answer"
+                    value="2"
+                    checked={this.state.correct_answer === "2"}
+                    onChange={this.onRadioChange}
+                  />
+                </Form.Field>
 
-          <button type = "submit"> Add </button>
+                <Form.Field>
+                  <Radio
+                    label="3"
+                    name="correct_answer"
+                    value="3"
+                    checked={this.state.correct_answer === "3"}
+                    onChange={this.onRadioChange}
+                  />
+                </Form.Field>
 
-        </form>
-      </div>
+            <Button type="submit">Submit</Button>
+          </Form>
+        </Grid.Column>
+      </Grid>
     );
   }
 }

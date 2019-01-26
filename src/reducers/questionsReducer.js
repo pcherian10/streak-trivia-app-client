@@ -5,11 +5,11 @@ export default function questionsReducer ( state = {
 
  switch (action.type) {
 
-   case 'LOAD_USER_QUESTIONS':
+   case 'LOAD_QUESTIONS':
     return {...state, questions: action.questions};
 
    case 'LOAD_GAME_QUESTIONS':
-    return {...state, questions: action.questions};  //need to filter out questions where user_id is not equal to id.
+    return {...state, questions: action.questions};
 
    case 'ADD_QUESTION':
     return {...state, questions: [...state.questions, action.question]};
