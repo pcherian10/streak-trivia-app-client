@@ -10,13 +10,8 @@ export default function questionsReducer ( state = {
     return {...state, questions: action.questions};
 
    case 'LOAD_GAME_QUESTIONS':
-    let updatedGameQuestions = state.questions.filter (q => {
-      if(q.user.id !== state.user.id) {
-        return q
-      }
-    })
-    console.log(updatedGameQuestions)
-    return {...state, questions: updatedGameQuestions}
+    let updatedGameQuestions = state.questions.filter (q => state.user.id !== q.user.id)
+    return {...state, questions: updatedGameQuestions};
 
    case 'ADD_QUESTION':
     return {...state, questions: [...state.questions, action.question]};
