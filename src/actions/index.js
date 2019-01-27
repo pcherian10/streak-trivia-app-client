@@ -8,12 +8,8 @@ export function login (user) {
 
 export function loadGameQuestions () {
   return dispatch => {
-    fetch(`${URL_ROOT}questions`)
-    .then(res => res.json())
-    .then( res => {
-      dispatch({ type: 'LOAD_GAME_QUESTIONS', questions: res})
-    })
-  }
+      dispatch({ type: 'LOAD_GAME_QUESTIONS'})
+    }
 }
 
 export function loadQuestions () {
@@ -21,7 +17,7 @@ export function loadQuestions () {
     fetch(`${URL_ROOT}questions`)
     .then(res => res.json())
     .then( res => {
-      dispatch({ type: 'LOAD_QUESTIONS', questions: res})
+      dispatch({ type: 'LOAD_QUESTIONS', questions: res })
     })
   }
 }

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import QuestionCard from './QuestionCard'
-import { loadQuestions } from '../../actions/index.js'
+import { loadQuestions, loadGameQuestions } from '../../actions/index.js'
 import { connect } from 'react-redux'
 
 
 class Questions extends Component {
 
   componentDidMount() {
-    this.props.loadQuestions()
+    this.props.loadGameQuestions()
   }
 
   render() {
@@ -22,13 +22,14 @@ class Questions extends Component {
 }
 
 const mapStateToProps = state => {
-  return { questions: state.questions.questions}
+  return { questions: state.questions.questions }
 }
 
 
 const mapDispatchToProps = (dispatch) => {
   return {
     loadQuestions: () => dispatch(loadQuestions()),
+    loadGameQuestions: () => dispatch(loadGameQuestions()),
   }
 }
 

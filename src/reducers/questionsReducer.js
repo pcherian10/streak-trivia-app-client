@@ -3,13 +3,20 @@ export default function questionsReducer ( state = {
    questions: []
  }, action) {
 
+   console.log(action)
  switch (action.type) {
 
    case 'LOAD_QUESTIONS':
     return {...state, questions: action.questions};
 
    case 'LOAD_GAME_QUESTIONS':
-    return {...state, questions: action.questions};
+    let updatedGameQuestions = state.questions.filter (q => {
+      if(q.user.id !== state.user.id) {
+        return q
+      }
+    })
+    console.log(updatedGameQuestions)
+    return {...state, questions: updatedGameQuestions}
 
    case 'ADD_QUESTION':
     return {...state, questions: [...state.questions, action.question]};
