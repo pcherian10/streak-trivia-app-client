@@ -12,23 +12,22 @@ class PlayGame extends Component {
 
   constructor (props) {
     super(props)
-    let index = 0;
 
     this.state = {
-      currentQuestions: this.props.questions,
+      currentQuestion: this.props.questions[0],
       userAnswer: "",
       index: 0
     }
   }
 
-
   onRadioChange = (e , {value}) => this.setState(
     {user_answer: value}
   );
 
+  component
+
 
   render () {
-    console.log(this.state.currentQuestions)
 
     return (
       <Grid centered style={styles.root}>
@@ -37,42 +36,42 @@ class PlayGame extends Component {
 
           <Header as='h1'>Streak Trivia</Header>
 
-          <Form>
+          <Form onSubmit = {this.handleOnSubmit}>
               <Form.Field>
                 <label>Question</label>
                   <input
                     type="text"
                     name = "text"
-                    value = {this.state.currentQuestions[this.state.index].text}
+                    value = {this.state.currentQuestion.text}
                   />
               </Form.Field>
 
                 <Form.Field>
                   <Radio
-                    label={this.state.currentQuestions[this.state.index].first_choice}
+                    label={this.state.currentQuestion.first_choice}
                     name="first_choice"
-                    value={this.state.currentQuestions[this.state.index].first_choice}
-                    checked={this.state.user_answer === this.state.currentQuestions[this.state.index].first_choice}
+                    value={this.state.currentQuestion.first_choice}
+                    checked={this.state.user_answer === this.state.currentQuestion.first_choice}
                     onChange={this.onRadioChange}
                   />
                 </Form.Field>
 
                 <Form.Field>
                   <Radio
-                    label={this.state.currentQuestions[this.state.index].second_choice}
-                    name="first_choice"
-                    value={this.state.currentQuestions[this.state.index].second_choice}
-                    checked={this.state.user_answer === this.state.currentQuestions[this.state.index].second_choice}
+                    label={this.state.currentQuestion.second_choice}
+                    name="second_choice"
+                    value={this.state.currentQuestion.second_choice}
+                    checked={this.state.user_answer === this.state.currentQuestion.second_choice}
                     onChange={this.onRadioChange}
                   />
                 </Form.Field>
 
                 <Form.Field>
                   <Radio
-                    label={this.state.currentQuestions[this.state.index].third_choice}
-                    name="first_choice"
-                    value={this.state.currentQuestions[this.state.index].third_choice}
-                    checked={this.state.user_answer === this.state.currentQuestions[this.state.index].third_choice}
+                    label={this.state.currentQuestion.third_choice}
+                    name="third_choice"
+                    value={this.state.currentQuestion.third_choice}
+                    checked={this.state.user_answer === this.state.currentQuestion.third_choice}
                     onChange={this.onRadioChange}
                   />
                 </Form.Field>
@@ -93,6 +92,18 @@ const mapStateToProps = state => {
   return {questions: state.questions.questions}
 }
 
+
+//componentWillMount() {}
+
+//componentDidMount() {}
+
+//componentWillReceiveProps(nextProps) {}
+// or
+//shouldComponentUpdate(nextProps, nextState)
+
+//componentWillUpdate(nextProps, nextState) {}
+//or
+//componentDidUpdate(prevProps, prevState) {}
 
 
 export default connect(mapStateToProps)(PlayGame)
