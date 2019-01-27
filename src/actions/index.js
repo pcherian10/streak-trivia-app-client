@@ -12,6 +12,12 @@ export function loadGameQuestions () {
     }
 }
 
+export function loadUserQuestions () {
+  return dispatch => {
+      dispatch({ type: 'LOAD_USER_QUESTIONS'})
+    }
+}
+
 export function loadQuestions () {
   return dispatch => {
     fetch(`${URL_ROOT}questions`)

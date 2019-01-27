@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Form, Button, Radio, Header } from 'semantic-ui-react'
-import { loadGameQuestions } from '../actions/index'
 
 const styles = {
   root: {
@@ -29,6 +28,7 @@ class PlayGame extends Component {
 
 
   render () {
+    console.log(this.state.currentQuestions)
 
     return (
       <Grid centered style={styles.root}>
@@ -44,7 +44,7 @@ class PlayGame extends Component {
                     type="text"
                     name = "text"
                     value = {this.state.currentQuestions[this.state.index].text}
-                    onChange = {this.handleOnChange} />
+                  />
               </Form.Field>
 
                 <Form.Field>
@@ -93,10 +93,6 @@ const mapStateToProps = state => {
   return {questions: state.questions.questions}
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    loadGameQuestions: () => dispatch(loadGameQuestions())
-  }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlayGame)
+
+export default connect(mapStateToProps)(PlayGame)

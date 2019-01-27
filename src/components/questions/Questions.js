@@ -6,9 +6,6 @@ import { connect } from 'react-redux'
 
 class Questions extends Component {
 
-  componentDidMount() {
-    this.props.loadGameQuestions()
-  }
 
   render() {
     const questions = this.props.questions.map( (q, i) => <QuestionCard question={q} key={q.id} /> )
