@@ -31,11 +31,11 @@ export default function questionsReducer ( state = {
       })
       return {...state, questions: updatedQuestions}
 
-   case 'UPDATE_USER_STREAK':
-      return {...state, user: [...state.user.streak + 1]}
+   case 'UPDATE_USER_STREAK_AND_QUESTION_ID':
+    return {...state, user: {...state.user, ...state.user.streak += 1, ...state.user.last_question_answered_id = action.payload}}
 
-   case 'UPDATE_USER_LAST_QUESTION_ANSWERED_ID':
-      return {...state, user: [...state.user.lastQuestionAnsweredId + 1]}
+   case 'UPDATE_USER_QUESTION_ID':
+    return {...state, user: {...state.user, ...state.user.last_question_answered_id = action.payload }}
 
    case 'LOGIN':
     return {...state, user: action.user};
@@ -48,3 +48,11 @@ export default function questionsReducer ( state = {
  }
 
 }
+//
+// function compare (a, b) {
+//   if (a.id > b.id){
+//     return 1;
+//   } else if (a.id < b.id) {
+//     return -1;
+//   }
+// }

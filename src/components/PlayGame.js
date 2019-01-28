@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Form, Button, Radio, Header } from 'semantic-ui-react'
-import { updateUserStreak, updateUserLastQuestionAnsweredId } from '../actions/index'
+import { updateUserStreakandQuestionId, updateUserQuestionId} from '../actions/index'
 import api from '../adaptors/api'
 
 
@@ -28,11 +28,12 @@ class PlayGame extends Component {
     {userAnswer: value}
   );
 
-  handleSubmit = () => {
-    debugger;
+  handleSubmitClick = () => {
+
     if (this.state.userAnswer === this.state.currentQuestion.correct_answer) {
-      this.props.updateUserStreak();
-      this.props.updateUserLastQuestionAnsweredId();
+      this.props.updateUserStreakandQuestionId(this.state.currentQuestion.id);
+      console.log(this.props.user)
+      api.user.updateUser(this.props.user)
       let updatedIndex = this.state.index += 1;
       this.setState = {
         currentQuestion: this.props.questions[updatedIndex],
@@ -41,12 +42,10 @@ class PlayGame extends Component {
       }
     }
     else {
-      api.user
-      .updateUser(this.props.user)
-        .then(res => {
-            console.log("Your streak ended, and your information has been updated to the database.")
-            this.props.history.push('/dashboard')
-          });
+      this.props.updateUserQuestionId(this.state.currentQuestion.id)
+      api.user.updateUser(this.props.user)
+      console.log("Your streak has ended, thanks for playing!")
+      this.props.history.push('/dashboard')
     }
 
   }
@@ -54,18 +53,18 @@ class PlayGame extends Component {
 
 
   render () {
-
     return (
       <Grid centered style={styles.root}>
         <Grid.Column width={10}>
           <Header as='h1'>Streak Trivia</Header>
 
-          <Form onSubmit = {this.handleSubmit}>
+            <div className="question">
                 <Form.Field>
                   <Header as='h3'>{this.state.currentQuestion.text}</Header>
+                  <p>by {this.state.currentQuestion.user.username}</p>
+                  <br></br>
                   <label style={{'color' : 'green'}}>Current Streak: {this.props.user.streak}</label>
                 </Form.Field>
-
 
                 <Form.Field>
                   <Radio
@@ -76,6 +75,7 @@ class PlayGame extends Component {
                     onChange={this.onRadioChange}
                   />
                 </Form.Field>
+                <br></br>
 
                 <Form.Field>
                   <Radio
@@ -86,6 +86,7 @@ class PlayGame extends Component {
                     onChange={this.onRadioChange}
                   />
                 </Form.Field>
+                <br></br>
 
                 <Form.Field>
                   <Radio
@@ -96,9 +97,10 @@ class PlayGame extends Component {
                     onChange={this.onRadioChange}
                   />
                 </Form.Field>
+                <br></br>
 
-            <Button type="submit">Submit</Button>
-          </Form>
+            <Button onClick={() => this.handleSubmitClick()} >Submit</Button>
+          </div>
 
         </Grid.Column>
       </Grid>
@@ -118,8 +120,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateUserStreak: () => dispatch(updateUserStreak()),
-    updateUserLastQuestionAnsweredId: () => dispatch(updateUserLastQuestionAnsweredId())
+    updateUserStreakandQuestionId: (questionId) => dispatch(updateUserStreakandQuestionId(questionId)),
+    updateUserQuestionId: (questionId) => dispatch(updateUserQuestionId(questionId)),
+
   }
 }
 

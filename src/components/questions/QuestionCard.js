@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Header } from 'semantic-ui-react'
+import { Card, Header, Button } from 'semantic-ui-react'
 
 const QuestionCard = ({question}) => {
 

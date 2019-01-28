@@ -18,7 +18,7 @@ const addQuestion = (user, question) => {
 
 const updateUser = (user) => {
   return fetch(`${API_ROOT}/users/${user.id}`, {
-    method: 'POST',
+    method: 'PATCH',
     headers: headers,
     data: {},
     dataType: "JSON",

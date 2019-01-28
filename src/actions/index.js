@@ -18,15 +18,15 @@ export function loadUserQuestions () {
     }
 }
 
-export function updateUserLastQuestionAnsweredId () {
+export function updateUserStreakandQuestionId (questionId) {
   return dispatch => {
-      dispatch({ type: 'UPDATE_USER_LAST_QUESTION_ANSWERED_ID'})
+      dispatch({ type: 'UPDATE_USER_STREAK_AND_QUESTION_ID', payload: questionId})
   }
 }
 
-export function updateUserStreak () {
+export function updateUserQuestionId (questionId) {
   return dispatch => {
-      dispatch({ type: 'UPDATE_USER_STREAK'})
+      dispatch({ type: 'UPDATE_USER_QUESTION_ID', payload: questionId})
   }
 }
 

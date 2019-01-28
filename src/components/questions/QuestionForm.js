@@ -95,8 +95,8 @@ class QuestionsForm extends Component {
                   <Radio
                     label="1"
                     name="correct_answer"
-                    value="1"
-                    checked={this.state.correct_answer === "1"}
+                    value={this.state.first_choice}
+                    checked={this.state.correct_answer === this.state.first_choice }
                     onChange={this.onRadioChange}
                   />
                 </Form.Field>
@@ -106,8 +106,8 @@ class QuestionsForm extends Component {
                   <Radio
                     label="2"
                     name="correct_answer"
-                    value="2"
-                    checked={this.state.correct_answer === "2"}
+                    value={this.state.second_choice}
+                    checked={this.state.correct_answer === this.state.second_choice}
                     onChange={this.onRadioChange}
                   />
                 </Form.Field>
@@ -116,8 +116,8 @@ class QuestionsForm extends Component {
                   <Radio
                     label="3"
                     name="correct_answer"
-                    value="3"
-                    checked={this.state.correct_answer === "3"}
+                    value={this.state.third_choice}
+                    checked={this.state.correct_answer === this.state.third_choice}
                     onChange={this.onRadioChange}
                   />
                 </Form.Field>
