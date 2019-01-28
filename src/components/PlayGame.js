@@ -23,17 +23,13 @@ class PlayGame extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-
-  }
-
 
   onRadioChange = (e , {value}) => this.setState(
     {userAnswer: value}
   );
 
-  handleSubmit = (event) => {
-    event.preventDefault();
+  handleSubmit = () => {
+    debugger;
     if (this.state.userAnswer === this.state.currentQuestion.correct_answer) {
       this.props.updateUserStreak();
       this.props.updateUserLastQuestionAnsweredId();
@@ -66,8 +62,8 @@ class PlayGame extends Component {
 
           <Form onSubmit = {this.handleSubmit}>
                 <Form.Field>
-                  <label>{this.state.currentQuestion.text}</label>
-                  <label>{this.props.user.streak}</label>
+                  <Header as='h3'>{this.state.currentQuestion.text}</Header>
+                  <label style={{'color' : 'green'}}>Current Streak: {this.props.user.streak}</label>
                 </Form.Field>
 
 
