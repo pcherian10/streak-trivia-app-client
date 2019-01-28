@@ -16,16 +16,16 @@ const addQuestion = (user, question) => {
 
 };
 
-// const getUserQuestions = (user) => {
-//   return fetch(`${API_ROOT}/users/${user.id}/questions`, {
-//     method: 'GET',
-//     headers: headers,
-//     data: {},
-//     dataType: "JSON",
-//   }).then(res => res.json());
-//
-// };
+const updateUser = (user) => {
+  return fetch(`${API_ROOT}/users/${user.id}`, {
+    method: 'POST',
+    headers: headers,
+    data: {},
+    dataType: "JSON",
+    body: JSON.stringify({ user })
+  }).then(res => res.json());
 
+};
 
 const login = (username, password) => {
   return fetch(`${API_ROOT}/auth/`, {
@@ -42,6 +42,8 @@ export default {
   },
   questions: {
     addQuestion,
-    //getUserQuestions
+  },
+  user: {
+    updateUser
   }
 };

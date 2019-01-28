@@ -18,6 +18,18 @@ export function loadUserQuestions () {
     }
 }
 
+export function updateUserLastQuestionAnsweredId () {
+  return dispatch => {
+      dispatch({ type: 'UPDATE_USER_LAST_QUESTION_ANSWERED_ID'})
+  }
+}
+
+export function updateUserStreak () {
+  return dispatch => {
+      dispatch({ type: 'UPDATE_USER_STREAK'})
+  }
+}
+
 export function loadQuestions () {
   return dispatch => {
     fetch(`${URL_ROOT}questions`)

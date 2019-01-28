@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Form, Button, Radio, Header } from 'semantic-ui-react'
+import { updateUserStreak, updateUserLastQuestionAnsweredId } from '../actions/index'
+import api from '../adaptors/api'
+
 
 const styles = {
   root: {
@@ -20,38 +23,60 @@ class PlayGame extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+
+  }
+
+
   onRadioChange = (e , {value}) => this.setState(
-    {user_answer: value}
+    {userAnswer: value}
   );
 
-  component
+  handleSubmit = (event) => {
+    event.preventDefault();
+    if (this.state.userAnswer === this.state.currentQuestion.correct_answer) {
+      this.props.updateUserStreak();
+      this.props.updateUserLastQuestionAnsweredId();
+      let updatedIndex = this.state.index += 1;
+      this.setState = {
+        currentQuestion: this.props.questions[updatedIndex],
+        userAnswer: "",
+        index: updatedIndex
+      }
+    }
+    else {
+      api.user
+      .updateUser(this.props.user)
+        .then(res => {
+            console.log("Your streak ended, and your information has been updated to the database.")
+            this.props.history.push('/dashboard')
+          });
+    }
+
+  }
+
 
 
   render () {
 
     return (
       <Grid centered style={styles.root}>
-
         <Grid.Column width={10}>
-
           <Header as='h1'>Streak Trivia</Header>
 
-          <Form onSubmit = {this.handleOnSubmit}>
-              <Form.Field>
-                <label>Question</label>
-                  <input
-                    type="text"
-                    name = "text"
-                    value = {this.state.currentQuestion.text}
-                  />
-              </Form.Field>
+          <Form onSubmit = {this.handleSubmit}>
+                <Form.Field>
+                  <label>{this.state.currentQuestion.text}</label>
+                  <label>{this.props.user.streak}</label>
+                </Form.Field>
+
 
                 <Form.Field>
                   <Radio
                     label={this.state.currentQuestion.first_choice}
                     name="first_choice"
                     value={this.state.currentQuestion.first_choice}
-                    checked={this.state.user_answer === this.state.currentQuestion.first_choice}
+                    checked={this.state.userAnswer === this.state.currentQuestion.first_choice}
                     onChange={this.onRadioChange}
                   />
                 </Form.Field>
@@ -61,7 +86,7 @@ class PlayGame extends Component {
                     label={this.state.currentQuestion.second_choice}
                     name="second_choice"
                     value={this.state.currentQuestion.second_choice}
-                    checked={this.state.user_answer === this.state.currentQuestion.second_choice}
+                    checked={this.state.userAnswer === this.state.currentQuestion.second_choice}
                     onChange={this.onRadioChange}
                   />
                 </Form.Field>
@@ -71,7 +96,7 @@ class PlayGame extends Component {
                     label={this.state.currentQuestion.third_choice}
                     name="third_choice"
                     value={this.state.currentQuestion.third_choice}
-                    checked={this.state.user_answer === this.state.currentQuestion.third_choice}
+                    checked={this.state.userAnswer === this.state.currentQuestion.third_choice}
                     onChange={this.onRadioChange}
                   />
                 </Form.Field>
@@ -89,8 +114,19 @@ class PlayGame extends Component {
 }
 
 const mapStateToProps = state => {
-  return {questions: state.questions.questions}
+  return {
+          questions: state.questions.questions,
+          user: state.questions.user
+        }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateUserStreak: () => dispatch(updateUserStreak()),
+    updateUserLastQuestionAnsweredId: () => dispatch(updateUserLastQuestionAnsweredId())
+  }
+}
+
 
 
 //componentWillMount() {}
@@ -102,8 +138,8 @@ const mapStateToProps = state => {
 //shouldComponentUpdate(nextProps, nextState)
 
 //componentWillUpdate(nextProps, nextState) {}
-//or
+
 //componentDidUpdate(prevProps, prevState) {}
 
 
-export default connect(mapStateToProps)(PlayGame)
+export default connect(mapStateToProps, mapDispatchToProps)(PlayGame)
