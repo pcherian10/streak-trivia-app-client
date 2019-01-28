@@ -29,7 +29,6 @@ class PlayGame extends Component {
   );
 
   handleSubmitClick = () => {
-
     if (this.state.userAnswer === this.state.currentQuestion.correct_answer) {
       this.props.updateUserStreakandQuestionId(this.state.currentQuestion.id);
       console.log(this.props.user)
@@ -49,8 +48,6 @@ class PlayGame extends Component {
     }
 
   }
-
-
 
   render () {
     return (
