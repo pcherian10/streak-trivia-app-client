@@ -38,6 +38,9 @@ export default function questionsReducer ( state = {
    case 'UPDATE_USER_QUESTION_ID':
     return {...state, user: {...state.user, ...state.user.last_question_answered_id = action.payload }}
 
+   case 'RESET_USER_STREAK':
+    return {...state, user: {...state.user, ...state.user.streak = action.payload }}
+
    case 'LOGIN':
     return {...state, user: action.user};
 

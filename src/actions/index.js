@@ -30,6 +30,12 @@ export function updateUserQuestionId (questionId) {
   }
 }
 
+export function resetUserStreak () {
+  return dispatch => {
+      dispatch({ type: 'RESET_USER_STREAK', payload: 0})
+  }
+}
+
 export function loadQuestions () {
   return dispatch => {
     fetch(`${URL_ROOT}questions`)

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Form, Button, Radio, Header } from 'semantic-ui-react'
-import { updateUserStreakandQuestionId, updateUserQuestionId} from '../actions/index'
+import { updateUserStreakandQuestionId, updateUserQuestionId, resetUserStreak} from '../actions/index'
 import api from '../adaptors/api'
 
 
@@ -37,6 +37,7 @@ class PlayGame extends Component {
   handleSubmitClick = () => {
 
     if (this.state.userAnswer === this.state.currentQuestion.correct_answer) {
+
       this.props.updateUserStreakandQuestionId(this.state.currentQuestion.id);
       api.user.updateUser(this.props.user)
       let updatedIndex = this.state.index += 1;
@@ -47,6 +48,7 @@ class PlayGame extends Component {
       })
     }
     else {
+      this.props.resetUserStreak()
       this.props.updateUserQuestionId(this.state.currentQuestion.id)
       api.user.updateUser(this.props.user)
       console.log("Your streak has ended, thanks for playing!")
@@ -127,23 +129,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     updateUserStreakandQuestionId: (questionId) => dispatch(updateUserStreakandQuestionId(questionId)),
     updateUserQuestionId: (questionId) => dispatch(updateUserQuestionId(questionId)),
-
+    resetUserStreak: () => dispatch(resetUserStreak())
   }
 }
-
-
-
-//componentWillMount() {}
-
-//componentDidMount() {}
-
-//componentWillReceiveProps(nextProps) {}
-// or
-//shouldComponentUpdate(nextProps, nextState)
-
-//componentWillUpdate(nextProps, nextState) {}
-
-//componentDidUpdate(prevProps, prevState) {}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayGame)
