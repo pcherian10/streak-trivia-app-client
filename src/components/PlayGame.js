@@ -23,22 +23,28 @@ class PlayGame extends Component {
     }
   }
 
+  componentWillUpdate (nextProps, nextState) {
+      console.log('Component Will Update - next props', nextProps, )
+      console.log('Component Will Update - next state', nextState )
+  }
+
+
 
   onRadioChange = (e , {value}) => this.setState(
     {userAnswer: value}
   );
 
   handleSubmitClick = () => {
+
     if (this.state.userAnswer === this.state.currentQuestion.correct_answer) {
       this.props.updateUserStreakandQuestionId(this.state.currentQuestion.id);
-      console.log(this.props.user)
       api.user.updateUser(this.props.user)
       let updatedIndex = this.state.index += 1;
-      this.setState = {
+      this.setState({
         currentQuestion: this.props.questions[updatedIndex],
         userAnswer: "",
         index: updatedIndex
-      }
+      })
     }
     else {
       this.props.updateUserQuestionId(this.state.currentQuestion.id)
@@ -107,6 +113,8 @@ class PlayGame extends Component {
   }
 
 }
+
+
 
 const mapStateToProps = state => {
   return {
