@@ -22,7 +22,12 @@ export default function questionsReducer ( state = {
     return {...state, questions: [...state.questions, action.question]};
 
    case 'UPDATE_USER_STREAK_AND_QUESTION_ID':
-    return {...state, user: {...state.user, ...state.user.streak += 1, ...state.user.last_question_answered_id = action.payload}}
+    let newHighestStreak = state.user.highest_streak
+    if (state.user.streak > state.user.highest_streak) {
+      newHighestStreak = state.user.streak
+    }
+    debugger;
+    return {...state, user: {...state.user, ...state.user.streak += 1, ...state.user.highest_streak = newHighestStreak, ...state.user.last_question_answered_id = action.payload}}
 
    case 'UPDATE_USER_QUESTION_ID':
     return {...state, user: {...state.user, ...state.user.last_question_answered_id = action.payload }}
