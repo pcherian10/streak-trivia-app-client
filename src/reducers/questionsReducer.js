@@ -26,7 +26,6 @@ export default function questionsReducer ( state = {
     if (state.user.streak > state.user.highest_streak) {
       newHighestStreak = state.user.streak
     }
-    debugger;
     return {...state, user: {...state.user, ...state.user.streak += 1, ...state.user.highest_streak = newHighestStreak, ...state.user.last_question_answered_id = action.payload}}
 
    case 'UPDATE_USER_QUESTION_ID':

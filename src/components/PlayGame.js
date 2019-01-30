@@ -44,8 +44,8 @@ class PlayGame extends Component {
         })
       }
     else {
+      this.props.updateUserStreakandQuestionId(this.state.currentQuestion.id);
       this.props.resetUserStreak()
-      this.props.updateUserQuestionId(this.state.currentQuestion.id)
       api.user.updateUser(this.props.user)
       this.props.history.push('/dashboard')
     }
