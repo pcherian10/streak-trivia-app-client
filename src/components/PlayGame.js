@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
-import { Grid, Form, Button, Radio, Header } from 'semantic-ui-react'
+import { Grid, Form, Button, Radio, Header, Message, Transition } from 'semantic-ui-react'
 import { updateUserStreakandQuestionId, updateUserQuestionId, resetUserStreak} from '../actions/index'
 import api from '../adaptors/api'
 
@@ -19,16 +20,10 @@ class PlayGame extends Component {
     this.state = {
       currentQuestion: this.props.questions[0],
       userAnswer: "",
-      index: 0
+      index: 0,
+      rightAnswer: false
     }
   }
-
-  componentWillUpdate (nextProps, nextState) {
-      console.log('Component Will Update - next props', nextProps, )
-      console.log('Component Will Update - next state', nextState )
-  }
-
-
 
   onRadioChange = (e , {value}) => this.setState(
     {userAnswer: value}
@@ -36,86 +31,91 @@ class PlayGame extends Component {
 
   handleSubmitClick = () => {
 
-    if (this.state.userAnswer === this.state.currentQuestion.correct_answer) {
-
+    if (this.state.userAnswer === this.state.currentQuestion.correct_answer
+      && this.state.index <= (this.props.questions.length - 1) ) {
       this.props.updateUserStreakandQuestionId(this.state.currentQuestion.id);
       api.user.updateUser(this.props.user)
-      let updatedIndex = this.state.index += 1;
-      this.setState({
-        currentQuestion: this.props.questions[updatedIndex],
-        userAnswer: "",
-        index: updatedIndex
-      })
-    }
+        let updatedIndex = this.state.index += 1;
+        this.setState({
+          currentQuestion: this.props.questions[updatedIndex],
+          userAnswer: "",
+          index: updatedIndex,
+          rightAnswer: true
+        })
+      }
     else {
       this.props.resetUserStreak()
       this.props.updateUserQuestionId(this.state.currentQuestion.id)
       api.user.updateUser(this.props.user)
-      console.log("Your streak has ended, thanks for playing!")
       this.props.history.push('/dashboard')
     }
-
   }
+
 
   render () {
-    return (
-      <Grid centered style={styles.root}>
-        <Grid.Column width={10}>
-          <Header as='h1'>Streak Trivia</Header>
+      let message = ""
+      if(this.state.index > 0 && this.state.rightAnswer === true) {
+        message = <Message>Correct! On to the next!</Message>
+      }
+      return (
+        <div>
+          <Grid centered style={styles.root}>
+            <Grid.Column width={10}>
+              <Header as='h1'>Streak Trivia</Header>
+                  {message}
+                <div className="question">
+                    <br></br>
+                    <Form.Field>
+                      <Header as='h3'>{this.state.currentQuestion.text}</Header>
+                      <p>by {this.state.currentQuestion.user.username}</p>
+                      <br></br>
 
-            <div className="question">
-                <Form.Field>
-                  <Header as='h3'>{this.state.currentQuestion.text}</Header>
-                  <p>by {this.state.currentQuestion.user.username}</p>
-                  <br></br>
-                  <label style={{'color' : 'green'}}>Current Streak: {this.props.user.streak}</label>
-                </Form.Field>
+                      <label style={{'color' : 'green'}}>Current Streak: {this.props.user.streak}</label>
+                    </Form.Field>
+                    <br></br>
 
-                <Form.Field>
-                  <Radio
-                    label={this.state.currentQuestion.first_choice}
-                    name="first_choice"
-                    value={this.state.currentQuestion.first_choice}
-                    checked={this.state.userAnswer === this.state.currentQuestion.first_choice}
-                    onChange={this.onRadioChange}
-                  />
-                </Form.Field>
-                <br></br>
+                    <Form.Field>
+                      <Radio
+                        label={this.state.currentQuestion.first_choice}
+                        name="first_choice"
+                        value={this.state.currentQuestion.first_choice}
+                        checked={this.state.userAnswer === this.state.currentQuestion.first_choice}
+                        onChange={this.onRadioChange}
+                      />
+                    </Form.Field>
+                    <br></br>
 
-                <Form.Field>
-                  <Radio
-                    label={this.state.currentQuestion.second_choice}
-                    name="second_choice"
-                    value={this.state.currentQuestion.second_choice}
-                    checked={this.state.userAnswer === this.state.currentQuestion.second_choice}
-                    onChange={this.onRadioChange}
-                  />
-                </Form.Field>
-                <br></br>
+                    <Form.Field>
+                      <Radio
+                        label={this.state.currentQuestion.second_choice}
+                        name="second_choice"
+                        value={this.state.currentQuestion.second_choice}
+                        checked={this.state.userAnswer === this.state.currentQuestion.second_choice}
+                        onChange={this.onRadioChange}
+                      />
+                    </Form.Field>
+                    <br></br>
 
-                <Form.Field>
-                  <Radio
-                    label={this.state.currentQuestion.third_choice}
-                    name="third_choice"
-                    value={this.state.currentQuestion.third_choice}
-                    checked={this.state.userAnswer === this.state.currentQuestion.third_choice}
-                    onChange={this.onRadioChange}
-                  />
-                </Form.Field>
-                <br></br>
+                    <Form.Field>
+                      <Radio
+                        label={this.state.currentQuestion.third_choice}
+                        name="third_choice"
+                        value={this.state.currentQuestion.third_choice}
+                        checked={this.state.userAnswer === this.state.currentQuestion.third_choice}
+                        onChange={this.onRadioChange}
+                      />
+                    </Form.Field>
+                    <br></br>
+                <Button onClick={() => this.handleSubmitClick()} >Submit</Button>
+              </div>
+            </Grid.Column>
+          </Grid>
+        </div>
+        )
 
-            <Button onClick={() => this.handleSubmitClick()} >Submit</Button>
-          </div>
-
-        </Grid.Column>
-      </Grid>
-
-    )
-
-  }
+    }
 
 }
-
 
 
 const mapStateToProps = state => {

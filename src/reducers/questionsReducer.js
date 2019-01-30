@@ -21,17 +21,6 @@ export default function questionsReducer ( state = {
    case 'ADD_QUESTION':
     return {...state, questions: [...state.questions, action.question]};
 
-   case 'UPDATE_QUESTION':
-     let updatedQuestions = state.questions.map( q => {
-        if (q.id === action.question.id) {
-          return action.question;
-        }
-        else {
-          return q;
-        }
-      })
-      return {...state, questions: updatedQuestions}
-
    case 'UPDATE_USER_STREAK_AND_QUESTION_ID':
     return {...state, user: {...state.user, ...state.user.streak += 1, ...state.user.last_question_answered_id = action.payload}}
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import api from './adaptors/api'
-import { login, loadQuestions } from './actions/index'
+import { login, loadQuestions, rankedUsers } from './actions/index'
 import { connect } from 'react-redux'
 
 class Login extends React.Component {
@@ -15,11 +15,6 @@ class Login extends React.Component {
       }
     };
   }
-
-  componentWillMount() {
-    this.props.loadQuestions();
-  }
-
 
   handleChange = e => {
     const newFields = { ...this.state.fields, [e.target.name]: e.target.value };
@@ -79,7 +74,6 @@ class Login extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     login: user => dispatch(login(user)),
-    loadQuestions: () => dispatch(loadQuestions())
   }
 }
 

@@ -45,3 +45,13 @@ export function loadQuestions () {
     })
   }
 }
+
+export function rankedUsers () {
+  return dispatch => {
+    fetch(`${URL_ROOT}ranked_users`)
+    .then(res => res.json())
+    .then( res => {
+      dispatch({ type: 'USERS_RANKED_BY_STREAK', payload: res })
+    })
+  }
+}
