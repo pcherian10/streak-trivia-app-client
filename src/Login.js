@@ -1,6 +1,6 @@
 import React from 'react'
 import api from './adaptors/api'
-import { login, loadQuestions, rankedUsers } from './actions/index'
+import { login } from './actions/index'
 import { connect } from 'react-redux'
 
 class Login extends React.Component {
@@ -30,7 +30,7 @@ class Login extends React.Component {
           this.setState({error: true});
         } else {
           this.props.login(res);
-          this.props.history.push('/dashboard')
+          this.props.history.push("/")
         }
     });
   };

@@ -8,27 +8,9 @@ import { loadGameQuestions, loadUserQuestions, rankedUsers, loadQuestions} from 
 
 class Dashboard extends Component {
 
-
-  componentWillMount() {
-    this.props.loadQuestions();
-    this.props.rankedUsers();
-  }
-
-  handleGameClick = () => {
-    this.props.loadGameQuestions()
-    this.props.history.push('/game')
-  }
-
-  handleUserQuestionsClick = () => {
-    this.props.loadUserQuestions()
-    this.props.history.push('/questions')
-  }
-
   render() {
     return (
       <div>
-        <Button onClick={this.handleGameClick}>Play Game!</Button>
-        <Button onClick={this.handleUserQuestionsClick}>Submit Your Own Question!</Button>
         <RankingsContainer />
       </div>
     );

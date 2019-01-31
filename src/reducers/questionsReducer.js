@@ -4,7 +4,8 @@ export default function questionsReducer ( state = {
  }, action) {
 
    console.log(action)
- switch (action.type) {
+
+   switch (action.type) {
 
    case 'LOAD_QUESTIONS':
     return {...state, questions: action.questions};
@@ -38,18 +39,10 @@ export default function questionsReducer ( state = {
     return {...state, user: action.user};
 
    case 'LOGOUT':
-    return {user: {id:"start"}, questions: ["start"]};
+    return {user:{}, questions: []};
 
    default:
     return state;
  }
 
 }
-//
-// function compare (a, b) {
-//   if (a.id > b.id){
-//     return 1;
-//   } else if (a.id < b.id) {
-//     return -1;
-//   }
-// }

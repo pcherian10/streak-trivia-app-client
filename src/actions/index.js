@@ -6,6 +6,12 @@ export function login (user) {
   }
 }
 
+export function logout () {
+  return dispatch => {
+    dispatch({type: "LOGOUT"})
+  }
+}
+
 export function loadGameQuestions () {
   return dispatch => {
       dispatch({ type: 'LOAD_GAME_QUESTIONS'})

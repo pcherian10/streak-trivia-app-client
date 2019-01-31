@@ -5,7 +5,6 @@ import { Grid, Form, Button, Radio, Header, Message, Transition } from 'semantic
 import { updateUserStreakandQuestionId, updateUserQuestionId, resetUserStreak} from '../actions/index'
 import api from '../adaptors/api'
 
-
 const styles = {
   root: {
     marginTop: "5%"
