@@ -4,6 +4,7 @@ import Navbar from './Navbar'
 import RankingsContainer from './containers/RankingsContainer'
 import PlayGame from './components/PlayGame'
 import QuestionsContainer from './containers/QuestionsContainer'
+import SignUp from './components/SignUp'
 import { BrowserRouter, Route, Switch, withRouter, NavLink} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout, loadQuestions, rankedUsers, login } from './actions/index'
@@ -34,6 +35,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={RankingsContainer}/>
             <Route path="/login" component={Login}/>
+            <Route path="/signup" component={SignUp}/>
             <Route path="/game" component={PlayGame}/>
             <Route path="/questions" component={QuestionsContainer}/>
             <Route path="/logout"/>

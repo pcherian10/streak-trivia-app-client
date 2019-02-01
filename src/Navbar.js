@@ -37,7 +37,11 @@ class Navbar extends React.Component {
       </Menu.Menu>
       ) : (
       <Menu.Menu position='right'>
-        <Menu.Item name="Sign Up" />
+        <Menu.Item
+          name="Sign Up"
+          onClick={() => this.props.history.push('/signup')}
+          as = {Link}
+          to = "/signup"/>
         <Menu.Item
            name = "Login"
            onClick={() => this.props.history.push('/login')}

@@ -19,6 +19,16 @@ const addQuestion = (user, question) => {
 
 };
 
+const addUser = (user) => {
+  return fetch(`${API_ROOT}/users`, {
+    method: 'POST',
+    headers: headers,
+    data: {},
+    dataType: "JSON",
+    body: JSON.stringify({ user })
+  }).then(res => res.json())
+};
+
 const updateUser = (user) => {
   return fetch(`${API_ROOT}/users/${user.id}`, {
     method: 'PATCH',
@@ -55,6 +65,7 @@ export default {
     addQuestion,
   },
   user: {
+    addUser,
     updateUser
   }
 };

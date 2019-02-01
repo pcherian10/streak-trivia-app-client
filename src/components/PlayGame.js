@@ -29,7 +29,6 @@ class PlayGame extends Component {
   );
 
   handleSubmitClick = () => {
-
     if (this.state.userAnswer === this.state.currentQuestion.correct_answer
       && this.state.index <= (this.props.questions.length - 1) ) {
       this.props.updateUserStreakandQuestionId(this.state.currentQuestion.id);
@@ -43,7 +42,6 @@ class PlayGame extends Component {
         })
       }
     else {
-      alert(`Incorrect, the correct answer was ${this.state.currentQuestion.correct_answer}.Your streak's been reset!`)
       this.props.updateUserStreakandQuestionId(this.state.currentQuestion.id);
       this.props.resetUserStreak()
       api.user.updateUser(this.props.user)
