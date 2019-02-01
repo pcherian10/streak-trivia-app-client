@@ -1,17 +1,11 @@
-import React, {Component} from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import React from 'react'
+import { Link } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
-import {loadGameQuestions, loadUserQuestions, logout} from './actions/index'
+import { logout, loadGameQuestions, loadUserQuestions, login } from './actions/index'
 import { connect } from 'react-redux'
-
-
-
+import  api  from './adaptors/api'
 
 class Navbar extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
 
   render () {
     const loggedIn = !!this.props.currentUser.id
@@ -32,6 +26,9 @@ class Navbar extends React.Component {
         to = "/questions"/>
     {loggedIn ? (
       <Menu.Menu position="right">
+        <Menu.Item>
+          Welcome, {this.props.currentUser.first_name}!
+        </Menu.Item>
         <Menu.Item
           name="Logout"
           onClick={() => this.props.logout()}
@@ -57,13 +54,13 @@ class Navbar extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadUserQuestions: () => dispatch(loadUserQuestions()),
+    login: (user) => dispatch(login(user)),
+    logout: () => dispatch(logout()),
     loadGameQuestions: () => dispatch(loadGameQuestions()),
-    logout: () => dispatch(logout())
+    loadUserQuestions: () => dispatch(loadUserQuestions())
   }
 }
 
 
 
 export default connect (null, mapDispatchToProps)(Navbar);
-//onClick={() => this.props.history.push('/login')}

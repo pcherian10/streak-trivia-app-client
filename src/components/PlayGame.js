@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { Grid, Form, Button, Radio, Header, Message, Transition } from 'semantic-ui-react'
-import { updateUserStreakandQuestionId, updateUserQuestionId, resetUserStreak} from '../actions/index'
+import { updateUserStreakandQuestionId, updateUserQuestionId, resetUserStreak, loadGameQuestions} from '../actions/index'
 import api from '../adaptors/api'
 
 const styles = {
@@ -43,10 +43,11 @@ class PlayGame extends Component {
         })
       }
     else {
+      alert(`Incorrect, the correct answer was ${this.state.currentQuestion.correct_answer}.Your streak's been reset!`)
       this.props.updateUserStreakandQuestionId(this.state.currentQuestion.id);
       this.props.resetUserStreak()
       api.user.updateUser(this.props.user)
-      this.props.history.push('/dashboard')
+      this.props.history.push('/')
     }
   }
 
@@ -119,7 +120,7 @@ class PlayGame extends Component {
 
 const mapStateToProps = state => {
   return {
-          questions: state.questions.questions,
+          questions: state.questions.selectedQuestions,
           user: state.questions.user
         }
 }
@@ -128,7 +129,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     updateUserStreakandQuestionId: (questionId) => dispatch(updateUserStreakandQuestionId(questionId)),
     updateUserQuestionId: (questionId) => dispatch(updateUserQuestionId(questionId)),
-    resetUserStreak: () => dispatch(resetUserStreak())
+    resetUserStreak: () => dispatch(resetUserStreak()),
+    loadGameQuestions: () => dispatch(loadGameQuestions())
   }
 }
 

@@ -2,8 +2,14 @@ import React, { Component } from 'react';
 import QuestionForm from '../components/questions/QuestionForm'
 import Questions from '../components/questions/Questions'
 import { connect } from 'react-redux'
+import { loadUserQuestions } from '../actions/index'
 
 class QuestionsContainer extends Component {
+
+
+  componentWillMount() {
+    this.props.loadUserQuestions()
+  }
 
   render() {
     return (
@@ -16,4 +22,11 @@ class QuestionsContainer extends Component {
 }
 
 
-export default connect()(QuestionsContainer)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadUserQuestions: () => dispatch(loadUserQuestions())
+  }
+}
+
+
+export default connect(null, mapDispatchToProps)(QuestionsContainer)

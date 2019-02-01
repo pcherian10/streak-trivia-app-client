@@ -1,6 +1,7 @@
 export default function questionsReducer ( state = {
    user:{},
-   questions: []
+   questions: [],
+   selectedQuestions: []
  }, action) {
 
    console.log(action)
@@ -12,12 +13,12 @@ export default function questionsReducer ( state = {
 
    case 'LOAD_USER_QUESTIONS':
     let updatedUserQuestions = state.questions.filter (q => state.user.id === q.user.id)
-    return {...state, questions: updatedUserQuestions};
+    return {...state, selectedQuestions: updatedUserQuestions};
 
    case 'LOAD_GAME_QUESTIONS':
     let updatedGameQuestions = state.questions.filter (q => state.user.id !== q.user.id)
     updatedGameQuestions = updatedGameQuestions.filter(q =>  q.id > state.user.last_question_answered_id)
-    return {...state, questions: updatedGameQuestions};
+    return {...state, selectedQuestions: updatedGameQuestions};
 
    case 'ADD_QUESTION':
     return {...state, questions: [...state.questions, action.question]};
@@ -39,7 +40,8 @@ export default function questionsReducer ( state = {
     return {...state, user: action.user};
 
    case 'LOGOUT':
-    return {user:{}, questions: []};
+    localStorage.removeItem('token')
+    return {user:{}, questions: [], selectedQuestions: []};
 
    default:
     return state;

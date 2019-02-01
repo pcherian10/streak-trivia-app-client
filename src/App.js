@@ -1,21 +1,28 @@
 import React, { Component } from 'react';
 import Login from './Login'
-import { logout, loadQuestions, rankedUsers } from './actions/index'
+import Navbar from './Navbar'
 import RankingsContainer from './containers/RankingsContainer'
 import PlayGame from './components/PlayGame'
 import QuestionsContainer from './containers/QuestionsContainer'
 import { BrowserRouter, Route, Switch, withRouter, NavLink} from 'react-router-dom'
-import './App.css';
 import { connect } from 'react-redux'
-import Navbar from './Navbar'
-
-
+import { logout, loadQuestions, rankedUsers, login } from './actions/index'
+import api from './adaptors/api'
 
 class App extends Component {
 
   componentWillMount() {
-    this.props.loadQuestions()
+    this.props.loadQuestions();
     this.props.rankedUsers();
+  }
+
+  componentDidMount () {
+    const token = localStorage.getItem('token');
+    if (token) {
+      api.auth.getCurrentUser().then(res => {
+        this.props.login(res)
+      });
+    }
   }
 
   render () {
@@ -45,9 +52,10 @@ const mapStateToProps =  (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    login: (user) => dispatch(login(user)),
     logout: () => dispatch(logout()),
     loadQuestions: () => dispatch(loadQuestions()),
-    rankedUsers: () => dispatch(rankedUsers()),
+    rankedUsers: () => dispatch(rankedUsers())
   }
 }
 

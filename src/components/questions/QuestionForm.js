@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import api from '../../adaptors/api'
 import '../../App.css';
+import { loadQuestions } from '../../actions/index'
 import { Grid, Form, Button, Radio, Header } from 'semantic-ui-react'
 
 const styles = {
@@ -33,6 +34,7 @@ class QuestionsForm extends Component {
           console.log("Question added.")
         }
     );
+    this.props.loadQuestions()
   };
 
   onRadioChange = (e , {value}) => this.setState(
@@ -134,5 +136,13 @@ const mapStateToProps = state => {
   return { user: state.questions.user}
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadQuestions: () => dispatch(loadQuestions())
+  }
+}
 
-export default connect(mapStateToProps)(QuestionsForm)
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionsForm)

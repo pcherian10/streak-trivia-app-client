@@ -1,17 +1,39 @@
 import React, {Component} from 'react'
 import Rankings from '../components/Rankings'
+import { Grid, Header } from 'semantic-ui-react'
 import { connect } from 'react-redux'
+
+
+const styles = {
+  root: {
+    marginTop: "5%"
+  }
+}
 
 class RankingsContainer extends Component {
 
   render() {
+
     const rankings = this.props.users.map((u,i) => {
       return <Rankings key={i} user={u}/>
     });
 
     return (
       <div>
-        {rankings}
+      <br></br>
+      <Grid centered>
+        <Grid.Column width={3}>
+        <Header as='h4'>Current Rankings</Header>
+        <table class="ui celled table">
+          <thead>
+            <tr><th>Username</th>
+                <th>High Streak</th>
+            </tr></thead>
+              {rankings}
+        </table>
+        </Grid.Column>
+      </Grid>
+
       </div>
     )
   }
