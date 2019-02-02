@@ -13,7 +13,10 @@ class Navbar extends React.Component {
     <nav>
     <Menu>
       <Menu.Item header name="Streak Trivia!"/>
-      <Menu.Item name="About" />
+      <Menu.Item
+        name="About"
+        as = {Link}
+        to = "/" />
       <Menu.Item
         name="Play Game"
         onClick={() => this.props.loadGameQuestions()}
@@ -25,16 +28,16 @@ class Navbar extends React.Component {
         as = {Link}
         to = "/questions"/>
     {loggedIn ? (
-      <Menu.Menu position="right">
-        <Menu.Item>
-          Welcome, {this.props.currentUser.first_name}!
-        </Menu.Item>
-        <Menu.Item
-          name="Logout"
-          onClick={() => this.props.logout()}
-          as = {Link}
-          to = "/logout"/>
-      </Menu.Menu>
+        <Menu.Menu position="right">
+          <Menu.Item>
+            Welcome, {this.props.currentUser.first_name}!
+          </Menu.Item>
+          <Menu.Item
+            name="Logout"
+            onClick={() => this.props.logout()}
+            as = {Link}
+            to = "/logout"/>
+        </Menu.Menu>
       ) : (
       <Menu.Menu position='right'>
         <Menu.Item

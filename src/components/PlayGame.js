@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import Message from './Message'
 import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
-import { Grid, Form, Button, Radio, Header, Message, Transition } from 'semantic-ui-react'
+import { Grid, Form, Button, Radio, Header, Transition } from 'semantic-ui-react'
 import { updateUserStreakandQuestionId, updateUserQuestionId, resetUserStreak, loadGameQuestions} from '../actions/index'
 import api from '../adaptors/api'
 
@@ -20,13 +21,14 @@ class PlayGame extends Component {
       currentQuestion: this.props.questions[0],
       userAnswer: "",
       index: 0,
-      rightAnswer: false
+      message: ""
     }
+
   }
 
-  onRadioChange = (e , {value}) => this.setState(
-    {userAnswer: value}
-  );
+  onRadioChange = (e , {value}) => this.setState({
+    userAnswer: value
+  });
 
   handleSubmitClick = () => {
     if (this.state.userAnswer === this.state.currentQuestion.correct_answer
@@ -38,10 +40,13 @@ class PlayGame extends Component {
           currentQuestion: this.props.questions[updatedIndex],
           userAnswer: "",
           index: updatedIndex,
-          rightAnswer: true
+          message: "Correct! On to the next!"
         })
       }
     else {
+      this.setState({message: "Incorrect! You're streak has been reset!"})
+      alert("Incorrect! You're streak has been reset!")
+      this.forceUpdate();
       this.props.updateUserStreakandQuestionId(this.state.currentQuestion.id);
       this.props.resetUserStreak()
       api.user.updateUser(this.props.user)
@@ -51,16 +56,12 @@ class PlayGame extends Component {
 
 
   render () {
-      let message = ""
-      if(this.state.index > 0 && this.state.rightAnswer === true) {
-        message = <Message>Correct! On to the next!</Message>
-      }
       return (
         <div>
           <Grid centered style={styles.root}>
             <Grid.Column width={10}>
               <Header as='h1'>Streak Trivia</Header>
-                  {message}
+                {this.state.message !== "" ? <Message message={this.state.message}/> : null }
                 <div className="question">
                     <br></br>
                     <Form.Field>
