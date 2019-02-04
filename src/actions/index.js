@@ -38,7 +38,7 @@ export function updateUserQuestionId (questionId) {
 
 export function resetUserStreak () {
   return dispatch => {
-      dispatch({ type: 'RESET_USER_STREAK', payload: 0})
+      dispatch({ type: 'RESET_USER_STREAK'})
   }
 }
 

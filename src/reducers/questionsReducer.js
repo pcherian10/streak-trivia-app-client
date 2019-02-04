@@ -34,7 +34,7 @@ export default function questionsReducer ( state = {
     return {...state, user: {...state.user, ...state.user.last_question_answered_id = action.payload }}
 
    case 'RESET_USER_STREAK':
-    return {...state, user: {...state.user, ...state.user.streak = action.payload }}
+    return {...state, user: {...state.user, ...state.user.streak = 0 }}
 
    case 'LOGIN':
     return {...state, user: action.user};

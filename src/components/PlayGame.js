@@ -44,9 +44,7 @@ class PlayGame extends Component {
         })
       }
     else {
-      this.setState({message: "Incorrect! You're streak has been reset!"})
       alert("Incorrect! You're streak has been reset!")
-      this.forceUpdate();
       this.props.updateUserStreakandQuestionId(this.state.currentQuestion.id);
       this.props.resetUserStreak()
       api.user.updateUser(this.props.user)

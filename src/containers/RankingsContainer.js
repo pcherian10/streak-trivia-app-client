@@ -24,12 +24,14 @@ class RankingsContainer extends Component {
       <Grid centered>
         <Grid.Column width={3}>
         <Header as='h4'>Current Rankings</Header>
-        <table class="ui celled table">
+        <table className="ui celled table">
           <thead>
             <tr><th>Username</th>
                 <th>High Streak</th>
             </tr></thead>
+            <tbody>
               {rankings}
+            </tbody>
         </table>
         </Grid.Column>
       </Grid>
