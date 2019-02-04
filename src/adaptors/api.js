@@ -33,9 +33,7 @@ const updateUser = (user) => {
   return fetch(`${API_ROOT}/users/${user.id}`, {
     method: 'PATCH',
     headers: headers,
-    data: {},
-    dataType: "JSON",
-    body: JSON.stringify({ user })
+    body: JSON.stringify(user)
   }).then(res => res.json());
 
 };

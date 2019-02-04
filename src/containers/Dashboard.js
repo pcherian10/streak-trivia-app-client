@@ -8,6 +8,10 @@ import { loadGameQuestions, loadUserQuestions, rankedUsers, loadQuestions} from 
 
 class Dashboard extends Component {
 
+  componentWillUpdate() {
+    this.props.rankedUsers()
+  }
+
   render() {
     return (
       <div>

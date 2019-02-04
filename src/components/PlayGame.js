@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Message from './Message'
+import MessageViewer from './MessageViewer'
 import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { Grid, Form, Button, Radio, Header, Transition } from 'semantic-ui-react'
-import { updateUserStreakandQuestionId, updateUserQuestionId, resetUserStreak, loadGameQuestions} from '../actions/index'
+import { updateUserStreak, updateHighestStreak, updateUserQuestionId, resetUserStreak} from '../actions/index'
 import api from '../adaptors/api'
 
 const styles = {
@@ -25,6 +25,8 @@ class PlayGame extends Component {
     }
 
   }
+
+
   componentWillUnmount () {
     api.user.updateUser(this.props.user)
   }
@@ -34,9 +36,13 @@ class PlayGame extends Component {
   });
 
   handleSubmitClick = () => {
+    this.props.updateUserQuestionId(this.state.currentQuestion.id);
+
     if (this.state.userAnswer === this.state.currentQuestion.correct_answer
       && this.state.index <= (this.props.questions.length - 1) ) {
-      this.props.updateUserStreakandQuestionId(this.state.currentQuestion.id);
+        this.props.updateUserStreak()
+        this.props.updateHighestStreak(this.props.user)
+        api.user.updateUser(this.props.user)
         let updatedIndex = this.state.index += 1;
         this.setState({
           currentQuestion: this.props.questions[updatedIndex],
@@ -49,8 +55,8 @@ class PlayGame extends Component {
     else {
       alert(`Incorrect! Correct answer was ${this.state.currentQuestion.correct_answer}.`)
       this.props.resetUserStreak();
-      this.props.updateUserQuestionId(this.state.currentQuestion.id);
-      this.props.history.push('/')
+      api.user.updateUser(this.props.user)
+      this.props.history.push('/dashboard')
     }
 
   }
@@ -63,7 +69,7 @@ class PlayGame extends Component {
           <Grid centered style={styles.root}>
             <Grid.Column width={10}>
               <Header as='h1'>Streak Trivia</Header>
-                {this.state.message !== "" ? <Message message={this.state.message}/> : null }
+                {this.state.message !== "" ? <MessageViewer message={this.state.message}/> : null }
                 <div className="question">
                     <br></br>
                     <Form.Field>
@@ -128,10 +134,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateUserStreakandQuestionId: (questionId) => dispatch(updateUserStreakandQuestionId(questionId)),
+    updateUserStreak: () => dispatch(updateUserStreak()),
+    updateHighestStreak: (user) => dispatch(updateHighestStreak(user)),
     updateUserQuestionId: (questionId) => dispatch(updateUserQuestionId(questionId)),
     resetUserStreak: () => dispatch(resetUserStreak()),
-    loadGameQuestions: () => dispatch(loadGameQuestions())
   }
 }
 

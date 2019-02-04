@@ -34,7 +34,6 @@ class SignUp extends React.Component {
         if (res.error) {
           this.setState({error: true});
         } else {
-          debugger;
           this.props.login(res);
           localStorage.setItem('token', res.id)
           this.props.history.push("/dashboard")
@@ -56,7 +55,7 @@ class SignUp extends React.Component {
             <input
               name="username"
               type="text"
-              placeholder="Username here..."
+              placeholder="Username"
               value={fields.username}
               onChange={this.handleChange}
               />
@@ -84,7 +83,7 @@ class SignUp extends React.Component {
             <input
               name="email"
               type="email"
-              placeholder="Email here..."
+              placeholder="Email"
               value={fields.email}
               onChange={this.handleChange}/>
           </Form.Field>
@@ -93,7 +92,7 @@ class SignUp extends React.Component {
             <input
               name="password"
               type="password"
-              placeholder="Password here..."
+              placeholder="Password"
               value={fields.password}
               onChange={this.handleChange}
               />

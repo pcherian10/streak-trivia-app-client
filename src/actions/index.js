@@ -24,12 +24,6 @@ export function loadUserQuestions () {
     }
 }
 
-export function updateUserStreakandQuestionId (questionId) {
-  return dispatch => {
-      dispatch({ type: 'UPDATE_USER_STREAK_AND_QUESTION_ID', payload: questionId})
-  }
-}
-
 export function updateUserQuestionId (questionId) {
   return dispatch => {
       dispatch({ type: 'UPDATE_USER_QUESTION_ID', payload: questionId})
@@ -39,6 +33,18 @@ export function updateUserQuestionId (questionId) {
 export function resetUserStreak () {
   return dispatch => {
       dispatch({ type: 'RESET_USER_STREAK'})
+  }
+}
+
+export function updateUserStreak () {
+  return dispatch => {
+      dispatch({ type: 'UPDATE_USER_STREAK'})
+  }
+}
+
+export function updateHighestStreak (user) {
+  return dispatch => {
+      dispatch({ type: 'UPDATE_HIGHEST_STREAK', payload:user})
   }
 }
 

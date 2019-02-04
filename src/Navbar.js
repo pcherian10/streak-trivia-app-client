@@ -12,7 +12,11 @@ class Navbar extends React.Component {
     return (
     <nav>
     <Menu>
-      <Menu.Item header name="Streak Trivia!"/>
+      <Menu.Item
+        header
+        name="Streak Trivia!"
+        as = {Link}
+        to = "/dashboard" />
       <Menu.Item
         name="About"
         as = {Link}
