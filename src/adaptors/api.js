@@ -30,6 +30,7 @@ const addUser = (user) => {
 };
 
 const updateUser = (user) => {
+  debugger;
   return fetch(`${API_ROOT}/users/${user.id}`, {
     method: 'PATCH',
     headers: headers,

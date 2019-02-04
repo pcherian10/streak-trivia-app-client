@@ -34,7 +34,6 @@ class PlayGame extends Component {
     if (this.state.userAnswer === this.state.currentQuestion.correct_answer
       && this.state.index <= (this.props.questions.length - 1) ) {
       this.props.updateUserStreakandQuestionId(this.state.currentQuestion.id);
-      api.user.updateUser(this.props.user)
         let updatedIndex = this.state.index += 1;
         this.setState({
           currentQuestion: this.props.questions[updatedIndex],
@@ -43,17 +42,19 @@ class PlayGame extends Component {
           message: "Correct! On to the next!"
         })
       }
+
     else {
-      alert("Incorrect! You're streak has been reset!")
-      this.props.updateUserStreakandQuestionId(this.state.currentQuestion.id);
-      this.props.resetUserStreak()
-      api.user.updateUser(this.props.user)
+      alert(`Incorrect! Correct answer was ${this.state.currentQuestion.correct_answer}.`)
+      this.props.resetUserStreak();
+      this.props.updateUserQuestionId(this.state.currentQuestion.id);
       this.props.history.push('/')
     }
+
   }
 
 
   render () {
+      api.user.updateUser(this.props.user)
       return (
         <div>
           <Grid centered style={styles.root}>
