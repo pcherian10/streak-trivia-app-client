@@ -53,23 +53,33 @@ class PlayGame extends Component {
       }
 
     else {
-      alert(`Incorrect! Correct answer was ${this.state.currentQuestion.correct_answer}.`)
+      if(this.state.message !== "Correct! On to the next!" || this.state.message !== "") {
+          this.setState({message: `Incorrect! Correct answer was ${this.state.currentQuestion.correct_answer}.`})
+        }
       this.props.resetUserStreak();
       api.user.updateUser(this.props.user)
-      this.props.history.push('/dashboard')
     }
 
   }
 
+  handleNewGameClick = () => {
+    let updatedIndex = this.state.index += 1;
+    this.setState({
+      currentQuestion: this.props.questions[updatedIndex],
+      userAnswer: "",
+      index: updatedIndex,
+      message: ""
+    })
+  }
+
 
   render () {
-      api.user.updateUser(this.props.user)
       return (
         <div>
           <Grid centered style={styles.root}>
             <Grid.Column width={10}>
               <Header as='h1'>Streak Trivia</Header>
-                {this.state.message !== "" ? <MessageViewer message={this.state.message}/> : null }
+                {this.state.message !== "" ? (<MessageViewer message={this.state.message}/>) : (null)}
                 <div className="question">
                     <br></br>
                     <Form.Field>
@@ -113,7 +123,9 @@ class PlayGame extends Component {
                       />
                     </Form.Field>
                     <br></br>
-                <Button onClick={() => this.handleSubmitClick()} >Submit</Button>
+                {this.state.message !== "" && this.state.message !== "Correct! On to the next!"  ?
+                  (<Button onClick={this.handleNewGameClick}>Click to Restart!</Button>) :
+                  (<Button onClick={this.handleSubmitClick}>Submit</Button>)}
               </div>
             </Grid.Column>
           </Grid>

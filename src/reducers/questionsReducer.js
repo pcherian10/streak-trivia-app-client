@@ -25,10 +25,10 @@ export default function questionsReducer ( state = {
 
    case 'UPDATE_HIGHEST_STREAK':
     let newHighestStreak = state.user.highest_streak
-    if (action.payload.streak > state.user.highest_streak) {
-      newHighestStreak = action.payload.streak
+    if (action.payload.streak >= state.user.highest_streak) {
+      newHighestStreak = action.payload.streak + 1
     }
-    return {...state, user: {...state.user, ...state.user.highest_streak = newHighestStreak + 1}}
+    return {...state, user: {...state.user, ...state.user.highest_streak = newHighestStreak}}
 
     case 'UPDATE_USER_STREAK':
      return {...state, user: {...state.user, ...state.user.streak += 1}}

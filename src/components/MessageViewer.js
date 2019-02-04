@@ -1,15 +1,13 @@
 import React from 'react'
-import {Message, Modal } from 'semantic-ui-react'
+import { Message} from 'semantic-ui-react'
 
-const MessageViewer = (props) => {
-  
+const MessageViewer = ({message}) => {
+
       return (
         <div>
-          <Message>{props.message}</Message>
+          <Message>{message}</Message>
         </div>
       );
-
-
 }
 
-export default Message;
+export default MessageViewer;

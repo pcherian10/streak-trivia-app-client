@@ -11,6 +11,10 @@ class QuestionsContainer extends Component {
     this.props.loadUserQuestions()
   }
 
+  componentWillUpdate() {
+    this.props.loadUserQuestions()
+  }
+
   render() {
     return (
       <div>
