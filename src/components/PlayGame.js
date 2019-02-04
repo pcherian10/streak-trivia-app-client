@@ -25,6 +25,9 @@ class PlayGame extends Component {
     }
 
   }
+  componentWillUnmount () {
+    api.user.updateUser(this.props.user)
+  }
 
   onRadioChange = (e , {value}) => this.setState({
     userAnswer: value
