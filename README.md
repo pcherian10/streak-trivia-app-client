@@ -1,13 +1,13 @@
-#STREAK TRIVIA
+# STREAK TRIVIA
 
-##DESCRIPTION
+## DESCRIPTION
 STREAK TRIVIA is a game that tests your knowledge across a wide variety of topics.
 Questions are three-part multiple choice. Goal is to answer as many questions in a row as possible,
 and claim the highest streak.
 
 This repository is the front-end. The back-end can be found here: https://github.com/pcherian10/streak-trivia-app-api
 
-##FUNCTIONALITY: The following are the core functionality components of STEAK Trivia -- users can:
+## FUNCTIONALITY: The following are the core functionality components of STEAK Trivia -- users can:
 
 Login/Signup, protected with bcrypt
 Play a game
@@ -16,7 +16,7 @@ Submit a question of his/her own.
 View rankings based on highest-streak.
 
 
-##DEVELOPMENT / FRAMEWORKS:
+## DEVELOPMENT / FRAMEWORKS:
 
 Front-end: The front end was developed using Javascript, using the React and Redux frameworks.
 Only outside module used is semantic-ui for visual presentation.
@@ -26,7 +26,7 @@ Back-end: The back end was built on Ruby on Rails, linking to a postgres databas
 bcrypt, for password authentication
 serializer, for cleaner data delivery to the front-end
 
-##ORGANIZATION:
+## ORGANIZATION:
 
 Front-end:
 
@@ -42,7 +42,7 @@ Back-end:
 
 The backend uses a RESTful structure. The auth and application controllers manage login authentication. The rest are namespaced controllers based on model. There are two serializers for users and questions.
 
-##TO RUN THE APPLICATION:
+## TO RUN THE APPLICATION:
 
 Front-end:
 
