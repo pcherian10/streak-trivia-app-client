@@ -7,7 +7,8 @@ and claim the highest streak.
 
 This repository is the front-end. The back-end can be found here: https://github.com/pcherian10/streak-trivia-app-api
 
-## FUNCTIONALITY: The following are the core functionality components of STEAK Trivia -- users can:
+## FUNCTIONALITY:
+The following are the core functionality components of STEAK Trivia -- users can:
 
 Login/Signup, protected with bcrypt
 Play a game
