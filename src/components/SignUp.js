@@ -1,5 +1,4 @@
 import React from 'react'
-import api from '../adaptors/api'
 import { addUser } from '../actions/index'
 import { connect } from 'react-redux'
 import { Grid, Form, Button } from 'semantic-ui-react'

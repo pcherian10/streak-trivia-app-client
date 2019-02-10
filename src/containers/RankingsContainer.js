@@ -4,12 +4,6 @@ import { Grid, Header } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 
 
-const styles = {
-  root: {
-    marginTop: "5%"
-  }
-}
-
 class RankingsContainer extends Component {
 
   render() {

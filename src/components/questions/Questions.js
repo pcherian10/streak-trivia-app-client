@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import QuestionCard from './QuestionCard'
-import { loadUserQuestions } from '../../actions/index'
-import { connect } from 'react-redux'
+
 
 const Questions = ({questions}) => {
 

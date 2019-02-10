@@ -1,5 +1,4 @@
 import URL_ROOT from '../URL'
-import { redirect } from 'react-router-dom'
 
 const token = localStorage.getItem('token');
 
@@ -23,6 +22,7 @@ export function login (username, password) {
    })
  }
 }
+
 
 
 export function logout () {

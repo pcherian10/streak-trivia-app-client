@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import Login from './Login'
 import Dashboard from './containers/Dashboard'
 import Navbar from './Navbar'
-import RankingsContainer from './containers/RankingsContainer'
 import PlayGame from './components/PlayGame'
 import QuestionsContainer from './containers/QuestionsContainer'
 import About from './components/About'
 import SignUp from './components/SignUp'
-import { BrowserRouter, Route, Switch, withRouter, NavLink} from 'react-router-dom'
+import { BrowserRouter, Route, Switch} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout, loadQuestions, rankedUsers, login } from './actions/index'
 import api from './adaptors/api'
@@ -26,6 +25,10 @@ class App extends Component {
         this.props.login(res)
       });
     }
+  }
+
+  componentWillUpdate() {
+    this.props.rankedUsers();
   }
 
   render () {

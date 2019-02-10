@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import api from '../../adaptors/api'
-import '../../App.css';
 import { addQuestion, loadUserQuestions } from '../../actions/index'
 import { Grid, Form, Button, Radio, Header } from 'semantic-ui-react'
 

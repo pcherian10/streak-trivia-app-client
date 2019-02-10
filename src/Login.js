@@ -1,5 +1,4 @@
 import React from 'react'
-import api from './adaptors/api'
 import { login } from './actions/index'
 import { connect } from 'react-redux'
 

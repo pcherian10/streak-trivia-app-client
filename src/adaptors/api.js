@@ -9,18 +9,20 @@ const headers = {
   Authorization: token
 };
 
-
 const updateUser = (user) => {
-  return dispatch => {
-    fetch(`${API_ROOT}/users/${user.id}`, {
-    method: 'PATCH',
+  fetch(`${API_ROOT}/users/${user.id}`, {
+    method: 'PUT',
     headers: headers,
     body: JSON.stringify(user)
   }).then(res => {
-    dispatch({type: "UPDATE_USER", user: res})
+    return dispatch => {
+      dispatch({type: "UPDATE_USER", user: res})
+      dispatch({type: "USERS_RANKED_BY_STREAK", user: res})
+    }
   })
-  }
-};
+}
+
+
 
 const getCurrentUser = (username, password) => {
   return fetch(`${API_ROOT}/current_user`, {

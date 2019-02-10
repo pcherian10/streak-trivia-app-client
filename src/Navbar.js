@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
 import { logout, loadGameQuestions, loadUserQuestions, login } from './actions/index'
 import { connect } from 'react-redux'
-import  api  from './adaptors/api'
 
 class Navbar extends React.Component {
 

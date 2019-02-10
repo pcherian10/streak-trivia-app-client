@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import MessageViewer from './MessageViewer'
-import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { Grid, Form, Button, Radio, Header, Transition } from 'semantic-ui-react'
 import { updateUserStreak, updateHighestStreak, updateUserQuestionId, resetUserStreak} from '../actions/index'
@@ -149,7 +148,7 @@ const mapDispatchToProps = (dispatch) => {
     updateUserStreak: () => dispatch(updateUserStreak()),
     updateHighestStreak: (user) => dispatch(updateHighestStreak(user)),
     updateUserQuestionId: (questionId) => dispatch(updateUserQuestionId(questionId)),
-    resetUserStreak: () => dispatch(resetUserStreak()),
+    resetUserStreak: () => dispatch(resetUserStreak())
   }
 }
 
