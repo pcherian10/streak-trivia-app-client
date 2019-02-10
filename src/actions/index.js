@@ -1,10 +1,29 @@
 import URL_ROOT from '../URL'
+import { redirect } from 'react-router-dom'
 
-export function login (user) {
-  return dispatch => {
-    dispatch({type: "LOGIN", user: user})
-  }
+const token = localStorage.getItem('token');
+
+const headers = {
+  'Content-Type': 'application/json',
+  Accepts: 'application/json',
+  Authorization: token
+};
+
+
+export function login (username, password) {
+ return dispatch => {
+ fetch(`${URL_ROOT}auth`, {
+   method: 'POST',
+   headers: headers,
+   body: JSON.stringify({ username, password })
+ }).then(res => res.json())
+   .then(res => {
+     localStorage.setItem('token', res.id)
+     dispatch({type: "LOGIN", user: res})
+   })
+ }
 }
+
 
 export function logout () {
   return dispatch => {
@@ -67,3 +86,34 @@ export function rankedUsers () {
     })
   }
 }
+
+export function addQuestion (user, question) {
+ return dispatch => {
+   fetch(`${URL_ROOT}users/${user.id}/questions`, {
+     method: 'POST',
+     headers: headers,
+     data: {},
+     dataType: "JSON",
+     body: JSON.stringify({ question })
+   }).then(res => res.json())
+     .then(res => {
+       dispatch({type: "ADD_QUESTION", question: res})
+       dispatch({type: "LOAD_USER_QUESTIONS"})
+     });
+ }
+}
+
+export function addUser (user) {
+  return dispatch => {
+    fetch(`${URL_ROOT}users`, {
+      method: 'POST',
+      headers: headers,
+      data: {},
+      dataType: "JSON",
+      body: JSON.stringify({ user })
+    }).then(res => res.json())
+    .then(res => {
+      dispatch({type: "LOGIN", user: res})
+    })
+  }
+};

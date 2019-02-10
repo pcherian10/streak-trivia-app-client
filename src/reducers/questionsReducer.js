@@ -30,8 +30,11 @@ export default function questionsReducer ( state = {
     }
     return {...state, user: {...state.user, ...state.user.highest_streak = newHighestStreak}}
 
-    case 'UPDATE_USER_STREAK':
-     return {...state, user: {...state.user, ...state.user.streak += 1}}
+   case 'UPDATE_USER_STREAK':
+    return {...state, user: {...state.user, ...state.user.streak += 1}}
+
+   case 'UPDATE_USER':
+    return {...state, user: action.user}
 
    case 'UPDATE_USER_QUESTION_ID':
     return {...state, user: {...state.user, ...state.user.last_question_answered_id = action.payload }}

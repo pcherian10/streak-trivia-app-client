@@ -1,25 +1,18 @@
 import React, { Component } from 'react';
 import QuestionCard from './QuestionCard'
+import { loadUserQuestions } from '../../actions/index'
 import { connect } from 'react-redux'
 
+const Questions = ({questions}) => {
 
-class Questions extends Component {
-
-
-  render() {
-    const questions = this.props.questions.map( (q, i) => <QuestionCard question={q} key={q.id} /> )
+   const selectedQuestions = questions.map( (q, i) => <QuestionCard question={q} key={q.id} /> )
 
     return (
       <div>
-        {questions}
+        {selectedQuestions}
       </div>
     );
-  }
+
 }
 
-const mapStateToProps = state => {
-  return { questions: state.questions.selectedQuestions }
-}
-
-
-export default connect(mapStateToProps)(Questions)
+export default (Questions)

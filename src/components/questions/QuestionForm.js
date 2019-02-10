@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import api from '../../adaptors/api'
 import '../../App.css';
-import { loadQuestions } from '../../actions/index'
+import { addQuestion, loadUserQuestions } from '../../actions/index'
 import { Grid, Form, Button, Radio, Header } from 'semantic-ui-react'
 
 const styles = {
@@ -28,14 +28,9 @@ class QuestionsForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    api.questions
-    .addQuestion(this.props.user, this.state)
-      .then(res => {
-          console.log("Question added.")
-        }
-    );
-    this.props.loadQuestions()
-  };
+    this.props.addQuestion(this.props.user, this.state);
+    this.props.loadUserQuestions()
+  }
 
   onRadioChange = (e , {value}) => this.setState(
     {correct_answer: value}
@@ -50,7 +45,6 @@ class QuestionsForm extends Component {
 
   render() {
     return (
-
       <Grid centered style={styles.root}>
         <Grid.Column width={10}>
           <Header as='h1'>Submit a Question!</Header>
@@ -138,11 +132,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadQuestions: () => dispatch(loadQuestions())
+    addQuestion: (user, state) => dispatch(addQuestion(user, state)),
+    loadUserQuestions: () => dispatch(loadUserQuestions())
   }
 }
-
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionsForm)

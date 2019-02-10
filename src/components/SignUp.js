@@ -1,6 +1,6 @@
 import React from 'react'
 import api from '../adaptors/api'
-import { login } from '../actions/index'
+import { addUser } from '../actions/index'
 import { connect } from 'react-redux'
 import { Grid, Form, Button } from 'semantic-ui-react'
 
@@ -28,17 +28,8 @@ class SignUp extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    api.user
-    .addUser(this.state.fields)
-      .then(res => {
-        if (res.error) {
-          this.setState({error: true});
-        } else {
-          this.props.login(res);
-          localStorage.setItem('token', res.id)
-          this.props.history.push("/dashboard")
-        }
-    });
+    this.props.addUser(this.state.fields)
+    this.props.history.push('/dashboard')
   };
 
   render() {
@@ -115,7 +106,7 @@ class SignUp extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login: user => dispatch(login(user)),
+    addUser: user => dispatch(addUser(user)),
   }
 }
 

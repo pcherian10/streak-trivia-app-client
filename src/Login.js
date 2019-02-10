@@ -22,19 +22,10 @@ class Login extends React.Component {
   };
 
   handleSubmit = e => {
-    e.preventDefault();
-    api.auth
-    .login(this.state.fields.username, this.state.fields.password)
-      .then(res => {
-        if (res.error) {
-          this.setState({error: true});
-        } else {
-          this.props.login(res);
-          localStorage.setItem('token', res.id)
-          this.props.history.push("/dashboard")
-        }
-    });
-  };
+  e.preventDefault();
+  this.props.login(this.state.fields.username, this.state.fields.password)
+  this.props.history.push('/dashboard')
+  }
 
   render() {
     const { fields } = this.state;
@@ -74,7 +65,7 @@ class Login extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login: user => dispatch(login(user)),
+    login: (user, password) => dispatch(login(user, password))
   }
 }
 

@@ -7,7 +7,7 @@ const About = () => {
     <div className="ui container centered" >
     <br></br>
     <br></br>
-      <div cla>
+      <div>
       <b>Welcome to STREAK Trivia!</b>
       <br></br>
       <br></br>
