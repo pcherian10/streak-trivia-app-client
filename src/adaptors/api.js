@@ -22,8 +22,6 @@ const updateUser = (user) => {
   })
 }
 
-
-
 const getCurrentUser = (username, password) => {
   return fetch(`${API_ROOT}/current_user`, {
     headers: headers,

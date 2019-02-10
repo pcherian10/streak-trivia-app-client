@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addQuestion, loadUserQuestions } from '../../actions/index'
 import { Grid, Form, Button, Radio, Header } from 'semantic-ui-react'
+import  MessageViewer  from '../MessageViewer.js'
 
 const styles = {
   root: {
@@ -19,7 +20,8 @@ class QuestionsForm extends Component {
       first_choice: "",
       second_choice: "",
       third_choice: "",
-      correct_answer: ""
+      correct_answer: "",
+      message: ""
     }
 
   }
@@ -27,7 +29,9 @@ class QuestionsForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.addQuestion(this.props.user, this.state);
-    this.props.loadUserQuestions()
+    this.setState({
+      message: "Question added!"
+    })
   }
 
   onRadioChange = (e , {value}) => this.setState(
@@ -46,6 +50,7 @@ class QuestionsForm extends Component {
       <Grid centered style={styles.root}>
         <Grid.Column width={10}>
           <Header as='h1'>Submit a Question!</Header>
+          {this.state.message !== "" ? <MessageViewer message={this.state.message} /> : null }
           <Form onSubmit={this.handleSubmit}>
             <Form.Field>
               <label>Question</label>
