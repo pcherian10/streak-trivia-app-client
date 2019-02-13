@@ -22,12 +22,23 @@ const updateUser = (user) => {
   })
 }
 
+const updateQuestion = (question) => {
+  fetch(`${API_ROOT}/users/${question.user_id}/questions/${question.id}`, {
+    method: 'PUT',
+    headers: headers,
+    body: JSON.stringify(question)
+  }).then(res => {
+    console.log(res)
+    res.json()
+  })
+}
+
 const getCurrentUser = (username, password) => {
   return fetch(`${API_ROOT}/current_user`, {
     headers: headers,
   }).then(res => res.json());
-
 };
+
 
 export default {
   auth: {
@@ -35,5 +46,8 @@ export default {
   },
   user: {
     updateUser
+  },
+  question: {
+    updateQuestion
   }
 };
