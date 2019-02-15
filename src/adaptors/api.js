@@ -27,9 +27,6 @@ const updateQuestion = (question) => {
     method: 'PUT',
     headers: headers,
     body: JSON.stringify(question)
-  }).then(res => {
-    console.log(res)
-    res.json()
   })
 }
 

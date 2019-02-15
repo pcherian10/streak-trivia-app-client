@@ -17,7 +17,7 @@ class QuestionCard extends Component {
         second_choice: this.props.question.second_choice,
         third_choice: this.props.question.third_choice,
         correct_answer: this.props.question.correct_answer,
-        votes: 0,
+        votes: this.props.question.votes,
         user_id: this.props.question.user.id
       }
     }
@@ -27,10 +27,10 @@ class QuestionCard extends Component {
   handleVoteClick = e => {
     e.preventDefault()
     const newQuestion = { ...this.state.question, votes: this.state.question.votes + 1 };
+    api.question.updateQuestion(this.state.question)
     this.setState({
       question: newQuestion
-    })
-    api.question.updateQuestion(this.state.question)
+      })
   }
 
   render () {
