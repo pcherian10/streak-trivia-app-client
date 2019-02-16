@@ -17,7 +17,7 @@ class QuestionsContainer extends Component {
   handleSortClick = e => {
     e.preventDefault();
     this.setState({
-      sorted: !this.state.sorted
+      sorted: true
     })
   }
 
