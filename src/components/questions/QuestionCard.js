@@ -27,10 +27,10 @@ class QuestionCard extends Component {
   handleVoteClick = e => {
     e.preventDefault()
     const newQuestion = { ...this.state.question, votes: this.state.question.votes + 1 };
-    api.question.updateQuestion(this.state.question)
+    api.question.updateQuestion(newQuestion)
     this.setState({
       question: newQuestion
-      })
+    })
   }
 
   render () {
