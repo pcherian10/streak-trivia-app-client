@@ -22,10 +22,12 @@ class QuestionsContainer extends Component {
   }
 
   render() {
+    console.log(this.props)
+    console.log(this.state)
     let sortedQuestions = null
     const selectedQuestions = this.props.questions
     if (this.state.sorted === true) {
-       sortedQuestions = this.props.questions.sort((a,b) => {
+       sortedQuestions = [...this.props.questions].sort((a,b) => {
           if (a.votes > b.votes) {
             return -1;
           }
